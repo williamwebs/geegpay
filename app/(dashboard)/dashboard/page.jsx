@@ -40,6 +40,7 @@ export default function Home() {
           <div className="grid grid-cols-2 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-3 md:gap-4">
             {chartData.map((i) => (
               <Card
+                key={i.name}
                 image={i.image}
                 title={i.title}
                 value={i.value}

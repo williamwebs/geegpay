@@ -32,8 +32,8 @@ const Sidebar = () => {
 
         <div>
           <div>
-            {menuLists.map((i) => (
-              <Link href={i.path} className="cursor-pointer mb-1 block">
+            {menuLists.map((i, index) => (
+              <Link key={index} href={i.path} className="cursor-pointer mb-1 block">
                 {i.icon}
               </Link>
             ))}
@@ -160,8 +160,8 @@ const Sidebar = () => {
           </div>
 
           <div className="absolute bottom-0">
-            {otherMenu.map((i) => (
-              <Link href={i.path}>{i.icon}</Link>
+            {otherMenu.map((i, index) => (
+              <Link key={index} href={i.path}>{i.icon}</Link>
             ))}
 
             {/* logout button */}

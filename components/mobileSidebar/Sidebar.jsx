@@ -44,8 +44,9 @@ const Sidebar = ({ toggleNav, setToggleNav }) => {
 
         <div>
           <div>
-            {menuLists.map((i) => (
+            {menuLists.map((i, index) => (
               <Link
+                key={index}
                 onClick={handleMenuClick}
                 href={i.path}
                 className="cursor-pointer mb-1 block"
@@ -56,8 +57,8 @@ const Sidebar = ({ toggleNav, setToggleNav }) => {
 
             {/* other buttons */}
             <div className="">
-              {otherMenu.map((i) => (
-                <Link onClick={handleMenuClick} href={i.path}>
+              {otherMenu.map((i, index) => (
+                <Link key={index} onClick={handleMenuClick} href={i.path}>
                   {i.icon}
                 </Link>
               ))}
