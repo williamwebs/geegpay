@@ -6,7 +6,12 @@ import { menuLists, otherMenu } from "@/constants/menuList";
 import { useEffect, useState } from "react";
 
 const Sidebar = ({ toggleNav, setToggleNav }) => {
-  const initialTheme = localStorage.getItem("theme") || "light";
+  // Check if localStorage is defined (client-side)
+  const isClient = typeof window !== "undefined";
+
+  const initialTheme = isClient
+    ? localStorage.getItem("theme") || "light"
+    : "light";
   const [theme, setTheme] = useState(initialTheme);
 
   // function to close the sidenav when a menu icon is clicked
@@ -18,7 +23,9 @@ const Sidebar = ({ toggleNav, setToggleNav }) => {
   const themeSwitchHandler = (newTheme) => {
     if (newTheme === "dark" || newTheme === "light") {
       setTheme(newTheme);
-      localStorage.setItem("theme", newTheme);
+
+      // Check if localStorage is defined (client-side)
+      isClient && localStorage.setItem("theme", newTheme);
       setToggleNav(false);
     }
   };

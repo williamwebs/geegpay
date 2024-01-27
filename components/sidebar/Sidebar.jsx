@@ -6,13 +6,20 @@ import { menuLists, otherMenu } from "@/constants/menuList";
 import { useEffect, useState } from "react";
 
 const Sidebar = () => {
-  const initialTheme = localStorage.getItem("theme") || "light";
+  // Check if localStorage is defined (client-side)
+  const isClient = typeof window !== "undefined";
+
+  const initialTheme = isClient
+    ? localStorage.getItem("theme") || "light"
+    : "light";
   const [theme, setTheme] = useState(initialTheme);
 
   const themeSwitchHandler = (newTheme) => {
     if (newTheme === "dark" || newTheme === "light") {
       setTheme(newTheme);
-      localStorage.setItem("theme", newTheme);
+
+      // Check if localStorage is defined (client-side)
+      isClient && localStorage.setItem("theme", newTheme);
     }
   };
 
@@ -33,7 +40,11 @@ const Sidebar = () => {
         <div>
           <div>
             {menuLists.map((i, index) => (
-              <Link key={index} href={i.path} className="cursor-pointer mb-1 block">
+              <Link
+                key={index}
+                href={i.path}
+                className="cursor-pointer mb-1 block"
+              >
                 {i.icon}
               </Link>
             ))}
@@ -161,7 +172,9 @@ const Sidebar = () => {
 
           <div className="absolute bottom-0">
             {otherMenu.map((i, index) => (
-              <Link key={index} href={i.path}>{i.icon}</Link>
+              <Link key={index} href={i.path}>
+                {i.icon}
+              </Link>
             ))}
 
             {/* logout button */}
