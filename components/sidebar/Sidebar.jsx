@@ -6,20 +6,22 @@ import { menuLists, otherMenu } from "@/constants/menuList";
 import { useEffect, useState } from "react";
 
 const Sidebar = () => {
-  // Check if localStorage is defined (client-side)
-  const isClient = typeof window !== "undefined";
+  const [theme, setTheme] = useState("light");
+  useEffect(() => {
+    // Check if localStorage is defined (client-side)
+    const storedTheme =
+      typeof window !== "undefined" ? localStorage.getItem("theme") : null;
 
-  const initialTheme = isClient
-    ? localStorage.getItem("theme") || "light"
-    : "light";
-  const [theme, setTheme] = useState(initialTheme);
+    // Update the theme based on localStorage or use the default "light" theme
+    setTheme(storedTheme || "light");
+  }, []);
 
   const themeSwitchHandler = (newTheme) => {
     if (newTheme === "dark" || newTheme === "light") {
       setTheme(newTheme);
 
       // Check if localStorage is defined (client-side)
-      isClient && localStorage.setItem("theme", newTheme);
+      typeof window !== "undefined" && localStorage.setItem("theme", newTheme);
     }
   };
 
@@ -30,6 +32,27 @@ const Sidebar = () => {
       document.body.classList.remove("dark");
     }
   }, [theme]);
+
+  // const initialTheme = isClient
+  //   ? localStorage.getItem("theme") || "light"
+  //   : "light";
+
+  // const themeSwitchHandler = (newTheme) => {
+  //   if (newTheme === "dark" || newTheme === "light") {
+  //     setTheme(newTheme);
+
+  //     // Check if localStorage is defined (client-side)
+  //     isClient && localStorage.setItem("theme", newTheme);
+  //   }
+  // };
+
+  // useEffect(() => {
+  //   if (theme === "dark") {
+  //     document.body.classList.add("dark");
+  //   } else {
+  //     document.body.classList.remove("dark");
+  //   }
+  // }, [theme]);
   return (
     <div className="sidebar">
       <div className="relative">

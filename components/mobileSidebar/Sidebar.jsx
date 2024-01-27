@@ -6,28 +6,28 @@ import { menuLists, otherMenu } from "@/constants/menuList";
 import { useEffect, useState } from "react";
 
 const Sidebar = ({ toggleNav, setToggleNav }) => {
-  // Check if localStorage is defined (client-side)
-  const isClient = typeof window !== "undefined";
+  const [theme, setTheme] = useState("light");
+  useEffect(() => {
+    // Check if localStorage is defined (client-side)
+    const storedTheme =
+      typeof window !== "undefined" ? localStorage.getItem("theme") : null;
 
-  const initialTheme = isClient
-    ? localStorage.getItem("theme") || "light"
-    : "light";
-  const [theme, setTheme] = useState(initialTheme);
+    // Update the theme based on localStorage or use the default "light" theme
+    setTheme(storedTheme || "light");
+  }, []);
 
-  // function to close the sidenav when a menu icon is clicked
-  const handleMenuClick = () => {
-    setToggleNav(false);
-  };
-
-  // function that handles light and dark mode
   const themeSwitchHandler = (newTheme) => {
     if (newTheme === "dark" || newTheme === "light") {
       setTheme(newTheme);
 
       // Check if localStorage is defined (client-side)
-      isClient && localStorage.setItem("theme", newTheme);
-      setToggleNav(false);
+      typeof window !== "undefined" && localStorage.setItem("theme", newTheme);
     }
+  };
+
+  // function to close the sidenav when a menu icon is clicked
+  const handleMenuClick = () => {
+    setToggleNav(false);
   };
 
   useEffect(() => {
@@ -37,7 +37,6 @@ const Sidebar = ({ toggleNav, setToggleNav }) => {
       document.body.classList.remove("dark");
     }
   }, [theme]);
-
   return (
     <div
       className={`mobile_sidebar rounded-full p-3 bg-gray600 dark:bg-white/30 backdrop-blur absolute top-[12%] right-0 ${

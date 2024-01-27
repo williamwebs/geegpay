@@ -5,7 +5,7 @@ import Range from "@/components/range/Range";
 import { chartData, platformsData } from "@/constants/menuList";
 import Link from "next/link";
 
-export default function Home() {
+const Home = () => {
   return (
     <main className="relative min-h-screen">
       {/* top containg the chart info */}
@@ -100,4 +100,6 @@ export default function Home() {
       </section>
     </main>
   );
-}
+};
+
+export default Home;
