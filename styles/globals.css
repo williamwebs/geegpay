@@ -1,0 +1,37 @@
+@import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@200;300;400;500;600;700;800&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  @apply font-globalFont w-screen overflow-x-hidden;
+}
+
+.sidebar {
+  @apply hidden fixed md:flex justify-center w-20 h-screen border-r border-[#ebecf2] dark:border-gray-800 py-5 bg-gray-50 dark:bg-gray900 z-10;
+}
+
+::-webkit-slider-runnable-track {
+  border-radius: 100%;
+}
+::-webkit-slider-thumb {
+  appearance: none;
+}
+
+/* modal */
+.modal_backdrop {
+  @apply w-full h-full backdrop-blur absolute top-0 left-0 right-0 bottom-0 flex justify-center z-30;
+}
+
+.modal_light {
+  @apply max-w-md w-full h-fit mx-5 sm:mx-0 p-6 sm:p-10 rounded-xl bg-white backdrop-blur my-28 relative flex items-center;
+}
+
+.modal_dark {
+  @apply max-w-md w-full h-fit mx-5 sm:mx-0 p-6 sm:p-10 rounded-xl bg-gray-900 backdrop-blur my-28 relative flex items-center;
+}
+
+.modal_close-btn {
+  @apply absolute right-3 top-3 w-6 h-8 hover:rotate-90 flex items-center justify-center rounded-full border border-gray-300 dark:border-black cursor-pointer transition delay-300;
+}
