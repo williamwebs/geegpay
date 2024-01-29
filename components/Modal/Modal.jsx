@@ -10,9 +10,10 @@ const Modal = ({ isOpen, onClose, children }) => {
     const storedTheme =
       typeof window !== "undefined" ? localStorage.getItem("theme") : null;
 
-    // Update the theme based on localStorage or use the default "light" theme
+    // Update the theme based localStorage or use the default "light" theme
     setTheme(storedTheme || "light");
   }, [theme]);
+  // 
 
   if (!isOpen) return null;
 
