@@ -25,11 +25,6 @@ const Sidebar = ({ toggleNav, setToggleNav }) => {
     }
   };
 
-  // function to close the sidenav when a menu icon is clicked
-  const handleMenuClick = () => {
-    setToggleNav(false);
-  };
-
   useEffect(() => {
     if (theme === "dark") {
       document.body.classList.add("dark");
@@ -37,6 +32,11 @@ const Sidebar = ({ toggleNav, setToggleNav }) => {
       document.body.classList.remove("dark");
     }
   }, [theme]);
+
+  // function to close the sidenav when a menu icon is clicked
+  const handleMenuClick = () => {
+    setToggleNav(false);
+  };
   return (
     <div
       className={`mobile_sidebar rounded-full p-3 bg-gray600 dark:bg-white/30 backdrop-blur absolute top-[12%] right-0 ${
